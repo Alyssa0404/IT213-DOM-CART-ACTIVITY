@@ -1,5 +1,6 @@
 // Variables
-const courses = document.querySelector('#courses-list');
+const courses = document.querySelector('#courses-list'),
+    shoppingCartContent = document.querySelector('#cart-content tbody');
 
 
 
@@ -33,6 +34,36 @@ function buyCourse(e)  {
 }
 // Read the HTML information of the selected course
 function getCourseInfo(course) {
-    console.log(course);
-    
+    // Create an Object with Course Data
+    const courseInfo = {
+        image: course.querySelector('img').src,
+        title: course.querySelector('h4').textContent,
+        price: course.querySelector('.price span').textContent,
+        id: course.querySelector('a').getAttribute('data-id')
+    }
+    // Insert into the shopping cart
+    addIntoCart(courseInfo);
+}
+//Display the selected course into the shopping cart
+
+function addIntoCart(course) {
+    // create a <tr>
+    const row = document.createElement('tr');
+
+    // Build the template
+    row.innerHTML = `
+        <tr>
+            <td>
+                <img src="${course.image}">
+            </td>
+            <td>${course.title}</td>
+            <td>${course.price}</td>
+            <td>
+                <a href="#" class="remove" data-id="${course.id}">X</a>
+            </td>
+
+        </tr>
+    `;
+    // add into the shopping cart
+    shoppingCartContent.appendChild(row);
 }
