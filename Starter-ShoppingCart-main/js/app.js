@@ -11,6 +11,18 @@ loadEventListeners();
 function loadEventListeners() {
     // When a new course is added
     courses.addEventListener('click', buyCourse);
+
+    //when the remove button is clicked
+    shoppingCartContent.addEventListener('click', removeCourse);
+}
+
+//remove course from the dom
+function removeCourse(e) {
+
+    if(e.target.classList.contains('remove')) {
+        e.target.parentElement.parentElement.remove();
+    }
+
 }
 
 
@@ -54,7 +66,7 @@ function addIntoCart(course) {
     row.innerHTML = `
         <tr>
             <td>
-                <img src="${course.image}">
+                <img src="${course.image}" width=100>
             </td>
             <td>${course.title}</td>
             <td>${course.price}</td>
